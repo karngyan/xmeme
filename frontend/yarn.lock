@@ -9266,16 +9266,16 @@ ws@^6.0.0, ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-x_meme_api@karngyan/xmeme-api#main:
+x_meme_api@karngyan/xmeme-api#dev:
   version "1.0.0"
-  resolved "https://codeload.github.com/karngyan/xmeme-api/tar.gz/a98f1c4ffd812a2085dd1ec05877fe791b528e73"
+  resolved "https://codeload.github.com/karngyan/xmeme-api/tar.gz/059c13e84f4c4f5cad02f1ded866bcc12fd33353"
   dependencies:
     querystring "0.2.0"
     superagent "3.7.0"
 
-x_meme_api@karngyan/xmeme-api#prod:
+x_meme_api@karngyan/xmeme-api#main:
   version "1.0.0"
-  resolved "https://codeload.github.com/karngyan/xmeme-api/tar.gz/d046a74db6cc436f8391ee5e2a2db75994618332"
+  resolved "https://codeload.github.com/karngyan/xmeme-api/tar.gz/a98f1c4ffd812a2085dd1ec05877fe791b528e73"
   dependencies:
     querystring "0.2.0"
     superagent "3.7.0"

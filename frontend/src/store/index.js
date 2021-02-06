@@ -29,7 +29,11 @@ export default createStore({
       return new Promise((resolve, reject) => {
         const api = new XMemeApi.MemesApi()
         console.debug(state.memes)
-        api.memeControllerCreateMeme(name, url, caption, function (error, data) {
+        const body = new XMemeApi.ModelsMeme()
+        body.name = name
+        body.url = url
+        body.caption = caption
+        api.memeControllerCreateMeme(body, function (error, data) {
           if (error) {
             console.error(error)
             reject(error)

@@ -48,25 +48,13 @@
                 "operationId": "MemeController.CreateMeme",
                 "parameters": [
                     {
-                        "in": "query",
-                        "name": "name",
-                        "description": "name of the owner",
+                        "in": "body",
+                        "name": "body",
+                        "description": "Meme Request",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "url",
-                        "description": "url of the meme",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "caption",
-                        "description": "caption of the meme",
-                        "required": true,
-                        "type": "string"
+                        "schema": {
+                            "$ref": "#/definitions/models.Meme"
+                        }
                     }
                 ],
                 "responses": {
@@ -81,6 +69,9 @@
                     },
                     "409": {
                         "description": "Conflict"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
                     },
                     "500": {
                         "description": "Internal Server Error"

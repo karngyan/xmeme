@@ -4,7 +4,7 @@ info:
   description: Submission for Crio Winter of Doing Stage 2B
   version: 1.0.0
   contact:
-    email: mail@karngyan.com
+    email: karngyan@gmail.com
   license:
     name: AGPLv3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -34,21 +34,12 @@ paths:
       description: Create New XMeme
       operationId: MemeController.CreateMeme
       parameters:
-      - in: query
-        name: name
-        description: name of the owner
+      - in: body
+        name: body
+        description: Meme Request
         required: true
-        type: string
-      - in: query
-        name: url
-        description: url of the meme
-        required: true
-        type: string
-      - in: query
-        name: caption
-        description: caption of the meme
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/models.Meme'
       responses:
         "200":
           description: '"Meme created successfully"'
@@ -58,6 +49,8 @@ paths:
           description: Not Acceptable
         "409":
           description: Conflict
+        "422":
+          description: Unprocessable entity
         "500":
           description: Internal Server Error
   /memes/{mid}:

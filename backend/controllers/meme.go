@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	beego "github.com/beego/beego/v2/server/web"
 	"net/http"
 	"strings"
@@ -58,36 +59,37 @@ func (mc *MemeController) GetMeme() {
 
 // @Title CreateMeme
 // @Description Create New XMeme
-// @Param name query string true "name of the owner"
-// @Param url query string true "url of the meme"
-// @Param caption query string true "caption of the meme"
+// @Param body body models.Meme true "Meme Request"
 // @Success 200 {object} models.IResponse "Meme created successfully"
 // @Failure 406 Not Acceptable
+// @Failure 422 Unprocessable entity
 // @Failure 409 Conflict
 // @Failure 500 Internal Server Error
 // @router /memes [post]
 func (mc *MemeController) CreateMeme() {
 
-	name := strings.TrimSpace(mc.GetString("name"))
-	url := strings.TrimSpace(mc.GetString("url"))
-	caption := strings.TrimSpace(mc.GetString("caption"))
+	var m models.Meme
 
-	if name == "" || url == "" || caption == "" {
+	if err := json.Unmarshal(mc.Ctx.Input.RequestBody, &m); err != nil {
+		mc.Ctx.Output.SetStatus(http.StatusUnprocessableEntity)
+		return
+	}
+
+	m.Name = strings.TrimSpace(m.Name)
+	m.Url = strings.TrimSpace(m.Url)
+	m.Caption = strings.TrimSpace(m.Caption)
+
+	if m.Name == "" || m.Url == "" || m.Caption == "" {
 		mc.Ctx.Output.SetStatus(http.StatusNotAcceptable)
 		return
 	}
 
 	// already exists
-	if prs := models.AllMemes().Filter("name", name).Filter("url", url).Filter("caption", caption).Exist(); prs {
+	if prs := models.AllMemes().Filter("name", m.Name).Filter("url", m.Url).Filter("caption", m.Caption).Exist(); prs {
 		mc.Ctx.Output.SetStatus(http.StatusConflict)
 		return
 	}
 
-	m := models.Meme{
-		Name:    name,
-		Url:     url,
-		Caption: caption,
-	}
 
 	if err := m.Insert(); err == nil {
 		// successful insert

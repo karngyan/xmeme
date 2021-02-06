@@ -1,5 +1,6 @@
 #!/bin/bash
 
 
-# Sleep for 3 seconds
-sleep 3
+# Sleep for 60 seconds
+echo "sleeping for 60 seconds before we test the API"
+sleep 60

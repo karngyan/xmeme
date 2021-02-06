@@ -2,8 +2,10 @@
 
 cd backend
 
+export PATH=$PATH:/usr/local/go/bin
+
 # run server
-go build main.go
+/usr/local/go/bin/go build main.go
 chmod +x main
-./main.go
+./main
 

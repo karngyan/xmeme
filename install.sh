@@ -11,6 +11,8 @@ export PATH=$PATH:/usr/local/go/bin
 sudo apt update
 sudo apt install -y postgresql
 
+sleep 2
+
 # db setup
 sudo -u postgres psql -c "CREATE ROLE xmeme LOGIN ENCRYPTED PASSWORD 'xmeme';"
 sudo -u postgres psql -c "CREATE DATABASE xmeme --owner xmeme"

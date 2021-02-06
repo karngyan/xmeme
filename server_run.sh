@@ -3,9 +3,10 @@
 cd backend
 
 export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
 
 # run server
-/usr/local/go/bin/go build main.go
+$GOROOT/bin/go build main.go
 chmod +x main
 ./main
 

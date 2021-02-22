@@ -1,13 +1,12 @@
 # xmeme
 
-swagger spec: https://swagger.xmeme.karngyan.com
+Simplest SPA where users can submit memes. 
+PS: CWoD stage 2.
 
 ### backend
 
-- prod: https://api.xmeme.karngyan.com
 - stack: Beego, postgres
 
 ### frontend
 
-- prod: https://xmeme.karngyan.com
-- stack: Vue3
+- stack: Vue3/tailwind

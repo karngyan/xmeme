@@ -1,22 +1,18 @@
 <template>
 
-<div class="bg-white">
+<div>
   <div class="mx-auto py-6 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-6">
     <div class="space-y-12">
       <div class="flex flex-col sm:flex-row justify-between">
 
         <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
           <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">X Meme</h2>
-          <p class="text-xl text-gray-500">Post your memes, don't dos/ddos me, it's on a free server</p>
+          <p class="text-xl text-gray-500">{{ serverConfigured ? 'baseUrl: ' + baseURL : 'please configure the baseUrl to create memes'}}</p>
         </div>
-        <div class="justify-end flex items-end sm:justify-start sm:items-start">
-          <a href="https://swagger.xmeme.karngyan.com" target="_blank" class="mr-2 cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-            swagger
-            <svg class="h-4 pl-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-            </svg>
-          </a>
+        <div class="justify-end flex items-end sm:justify-start sm:items-start space-x-2">
+          <router-link :to="{name: 'Configure'}" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Configure
+          </router-link>
           <button @click="sideBarOpen = true" type="button" class="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Create Meme
           </button>
@@ -51,7 +47,7 @@
                     New X Meme
                   </h2>
                   <p class="text-sm text-gray-500">
-                    Get started by filling in the information below to create your new xmeme. Don't DOS it please. Be a human.
+                    Get started by filling in the information below to create your new xmeme.
                   </p>
                 </div>
                 <div class="h-7 flex items-center">
@@ -155,8 +151,8 @@
 </template>
 
 <script>
+import Meme from '@/components/Meme';
 
-import Meme from "@/components/Meme";
 export default {
   name: "Home",
   components: {Meme},
@@ -177,6 +173,12 @@ export default {
     }
   },
   computed: {
+    serverConfigured() {
+      return this.$store.state.serverConfigured
+    },
+    baseURL() {
+      return this.$store.state.baseURL
+    },
     name() {
       return this.meme.name.trim()
     },
@@ -188,8 +190,7 @@ export default {
     },
     showError() {
       return this.name === '' || this.url === '' || this.caption === '';
-
-    },
+    }
   },
   methods: {
     onImgError(e) {
@@ -225,8 +226,13 @@ export default {
   },
   created() {
     console.debug('all set')
-
     const store = this.$store
+
+    if (!store.state.serverConfigured) {
+      this.$router.push('/configure')
+      return
+    }
+
     store.dispatch("fetchAllMemes")
       .then(memes => {
         this.memes = memes

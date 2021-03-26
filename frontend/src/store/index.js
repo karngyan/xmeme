@@ -1,47 +1,70 @@
 import { createStore } from 'vuex'
-import XMemeApi from 'x_meme_api'
+import axios from "axios";
 
 export default createStore({
   state: {
-    memes: [],
+    baseURL: '',
+    serverConfigured: null,
   },
-  mutations: {
-  },
-  modules: {
-  },
-  actions: {
-    fetchAllMemes() {
-      return new Promise((resolve, reject) => {
-        const api = new XMemeApi.MemesApi()
 
-        api.memeControllerGetAllMemes(function (error, data) {
-          if (error) {
-            console.debug("some error occurred")
-            reject(error)
-          } else {
-            resolve(data)
-          }
-        })
+  mutations: {
+    setServer(state, baseURL) {
+      if (baseURL) {
+        state.baseURL = baseURL
+        state.serverConfigured = true
+      }
+    }
+  },
+
+  getters: {
+    baseURL(state) {
+      return state.baseURL
+    },
+    serverConfigured(state) {
+      return state.serverConfigured
+    }
+  },
+
+  actions: {
+    fetchAllMemes({state}) {
+      return new Promise((resolve, reject) => {
+
+        const endpoint = state.baseURL + '/memes'
+        axios.get(endpoint)
+            .then((resp) => {
+              resolve(resp.data)
+            })
+            .catch((error) => {
+              reject(error)
+            })
       })
     },
 
     createMeme({state}, {name, url, caption}) {
       return new Promise((resolve, reject) => {
-        const api = new XMemeApi.MemesApi()
-        console.debug(state.memes)
-        const body = new XMemeApi.ModelsMeme()
-        body.name = name
-        body.url = url
-        body.caption = caption
-        api.memeControllerCreateMeme(body, function (error, data) {
-          if (error) {
-            console.error(error)
-            reject(error)
-          } else {
-            resolve(data)
-          }
+        const endpoint = state.baseURL + '/memes'
+        axios.post(endpoint, {
+          name: name,
+          url: url,
+          caption
+        }).then((resp) => {
+          resolve(resp.data)
+        }).catch((error) => {
+          reject(error)
         })
       })
-    }
-  }
+    },
+
+    configureServer({commit}, {baseURL}) {
+      return new Promise((resolve) => {
+        commit('setServer', baseURL)
+        resolve('configured')
+      })
+    },
+  },
+
+
+
+
+
 })

@@ -20,7 +20,7 @@
 
 <script>
 export default {
-name: 'TheFooter'
+name: 'TheNavbar'
 }
 </script>
 

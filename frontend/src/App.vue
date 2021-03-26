@@ -1,8 +1,10 @@
 <template>
-  <TheFooter/>
-  <hr class="z-40">
-  <router-view/>
-  <TheFooter/>
+  <div>
+    <TheNavbar/>
+    <hr class="z-40">
+    <router-view/>
+    <TheFooter/>
+  </div>
 </template>
 
 <style lang="scss">
@@ -15,9 +17,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Ubuntu&display=swap');
 </style>
+
 <script>
 import TheFooter from "@/components/TheFooter";
+import TheNavbar from "@/components/TheNavbar";
+
 export default {
-  components: {TheFooter}
+  components: {TheNavbar, TheFooter}
 }
 </script>

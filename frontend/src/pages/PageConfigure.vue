@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl h-screen flex items-center justify-center mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl md:w-1/3 sm:w-1/2 mx-auto">
+    <div class="max-w-7xl md:w-1/3 sm:w-1/2 mx-auto px-6 py-8 shadow-2xl rounded-lg">
       <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100">
         <svg class="h-6 w-6 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm14 1a1 1 0 11-2 0 1 1 0 012 0zM2 13a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2zm14 1a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd" />

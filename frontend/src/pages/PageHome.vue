@@ -7,7 +7,7 @@
 
         <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
           <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">X Meme</h2>
-          <p class="text-xl text-gray-500">{{ serverConfigured ? 'baseUrl: ' + baseURL : 'please configure the baseUrl to create memes'}}</p>
+          <p class="text-xl text-gray-500">{{ serverConfigured ? 'baseURL: ' + baseURL : 'please configure the baseUrl to create memes'}}</p>
         </div>
         <div class="justify-end flex items-end sm:justify-start sm:items-start space-x-2">
           <router-link :to="{name: 'Configure'}" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

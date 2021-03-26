@@ -1,9 +1,9 @@
 <template>
   <div>
-    <TheNavbar/>
+    <TheNavbar v-if="$route.path !== '/configure'"/>
     <hr class="z-40">
     <router-view/>
-    <TheFooter/>
+    <TheFooter  v-if="$route.path !== '/configure'"/>
   </div>
 </template>
 
